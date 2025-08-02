@@ -8,10 +8,14 @@
     <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
 
     <script>
+      window.addEventListener("message", (event) => {
+        console.log("Parent received:", event.origin, event.data);
+      });
        
     </script>
   </body>
 </html>
+
 
 
 
