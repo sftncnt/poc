@@ -3,15 +3,21 @@
   <body>
     <script>
       // wait until the parent finishes loading the target iframe
-      setTimeout(() => {
-
+     function tryPostMessage() {
+      try {
+        console.log("Sending message to parent...");
         window.parent.postMessage("trigger", "*");
-        console.log("Sent message to parent");
-        
-      }, 2000); // wait a bit for iframe to load
+      } catch (e) {
+        console.error("Failed to send postMessage", e);
+        }
+      }
+
+      setTimeout(tryPostMessage, 1000); // try after 1 sec
+
     </script>
   </body>
 </html>
+
 
 
 
