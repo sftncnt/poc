@@ -25,6 +25,7 @@
         // Step 4: Listen for response from storageHub
         window.addEventListener("message", (event) => {
           console.log("Sandboxed iframe received response from victim:", event.origin, event.data);
+        }
 
           // Optionally forward response to main parent page
           window.parent.postMessage("Victim said: " + event.data, "*");
@@ -32,6 +33,7 @@
     </script>
   </body>
 </html>
+
 
 
 
