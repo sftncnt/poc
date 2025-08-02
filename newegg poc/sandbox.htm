@@ -16,8 +16,10 @@
           });
 
           targetFrame.contentWindow.postMessage(payload, "*");
+          console.log("Sent message to storageHub");
         }
       }, 2000); // wait a bit for iframe to load
     </script>
   </body>
 </html>
+
