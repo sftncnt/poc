@@ -5,7 +5,7 @@
 
 
     <!-- Embed sandboxed attacker iframe -->
-    <iframe src="sandbox.htm" sandbox="allow-scripts" style="display:none;"></iframe>
+    <iframe src="sandbox.htm" sandbox="allow-scripts allow-same-origin" style="display:none;"></iframe>
 
     <script>
       window.addEventListener("message", (event) => {
@@ -15,6 +15,7 @@
     </script>
   </body>
 </html>
+
 
 
 
